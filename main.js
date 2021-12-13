@@ -38,11 +38,9 @@ const textureLoader = new THREE.TextureLoader()
 
 const earthG = new THREE.SphereGeometry(earth_radius, 20, 20)
 const earthM = new THREE.MeshPhongMaterial({
-	color: 0xfffff,
 	map: textureLoader.load(earthMap),
 	specularMap: textureLoader.load(earth_specular),
 	normalMap: textureLoader.load(earth_normal)
-
 })
 const earth = new THREE.Mesh(earthG, earthM)
 scene.add(earth)
@@ -57,14 +55,14 @@ const earthDiv = document.createElement('div')
 earthDiv.className = 'label'
 earthDiv.textContent = 'Earth'
 const earthLabel = new CSS2DObject(earthDiv)
-earthLabel.position.set(0, earth_radius+0.5, 0);
+earthLabel.position.set(0, earth_radius + 0.5, 0);
 earth.add(earthLabel)
 
 const moonDiv = document.createElement('div')
 moonDiv.className = 'label'
 moonDiv.textContent = 'Moon'
 const moonLabel = new CSS2DObject(moonDiv)
-moonLabel.position.set(0,moon_radius+0.5,0) 
+moonLabel.position.set(0, moon_radius + 0.5, 0)
 moon.add(moonLabel)
 
 const labelRenderer = new CSS2DRenderer();
