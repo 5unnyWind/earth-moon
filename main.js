@@ -6,7 +6,7 @@ import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRe
 import earthMap from './textures/planets/earth_atmos_2048.jpg'
 import moonMap from './textures/planets/moon_1024.jpg'
 import earth_specular from '/textures/planets/earth_specular_2048.jpg'
-import earth_normal from '/textures/planets/earth_normal_2048.jpg' 
+import earth_normal from '/textures/planets/earth_normal_2048.jpg'
 
 const earth_radius = 2.5
 const moon_radius = 0.27
@@ -40,8 +40,8 @@ const earthG = new THREE.SphereGeometry(earth_radius, 20, 20)
 const earthM = new THREE.MeshPhongMaterial({
 	color: 0xfffff,
 	map: textureLoader.load(earthMap),
-	specularMap:textureLoader.load(earth_specular),
-	normalMap:textureLoader.load(earth_normal)
+	specularMap: textureLoader.load(earth_specular),
+	normalMap: textureLoader.load(earth_normal)
 
 })
 const earth = new THREE.Mesh(earthG, earthM)
@@ -53,7 +53,7 @@ const moon = new THREE.Mesh(mooonG, moonM)
 moon.position.set(-5, 0, 0)
 scene.add(moon)
 
-const renderer = new THREE.WebGLRenderer({alpha:true})
+const renderer = new THREE.WebGLRenderer({ alpha: true })
 renderer.setPixelRatio(devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
@@ -76,3 +76,8 @@ animate()
 //   <h1>Hello Vite!</h1>
 //   <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
 // `
+window.onresize = () => {
+	camera.aspect = window.innerWidth / window.innerHeight
+	camera.updateProjectionMatrix()
+	renderer.setSize(window.innerWidth, window.innerHeight)
+}
