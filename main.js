@@ -71,7 +71,7 @@ labelRenderer.domElement.style.position = 'absolute';
 labelRenderer.domElement.style.top = '0px';
 document.body.appendChild(labelRenderer.domElement);
 
-const renderer = new THREE.WebGLRenderer({ alpha: true })
+const renderer = new THREE.WebGLRenderer({ alpha: true ,antialias:true})
 renderer.setPixelRatio(devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
@@ -79,6 +79,7 @@ renderer.render(scene, camera)
 
 
 const controls = new OrbitControls(camera, labelRenderer.domElement)
+controls.enableDamping =true
 
 const clock = new THREE.Clock()
 
