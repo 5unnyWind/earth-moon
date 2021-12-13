@@ -20,7 +20,7 @@ camera.lookAt(scene.position)
 
 
 const axes = new THREE.AxesHelper(30)
-scene.add(axes)
+// scene.add(axes)
 
 
 const spotlight = new THREE.SpotLight(0xffffff)
@@ -28,7 +28,7 @@ spotlight.position.set(30, 20, 0)
 scene.add(spotlight)
 
 const spotLightHelper = new THREE.SpotLightHelper(spotlight)
-scene.add(spotLightHelper)
+// scene.add(spotLightHelper)
 
 const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
 ambientLight.intensity = 3
@@ -53,12 +53,34 @@ const moon = new THREE.Mesh(mooonG, moonM)
 moon.position.set(-5, 0, 0)
 scene.add(moon)
 
+const earthDiv = document.createElement('div')
+earthDiv.className = 'label'
+earthDiv.textContent = 'Earth'
+const earthLabel = new CSS2DObject(earthDiv)
+earthLabel.position.set(0, earth_radius+0.5, 0);
+earth.add(earthLabel)
+
+const moonDiv = document.createElement('div')
+moonDiv.className = 'label'
+moonDiv.textContent = 'Moon'
+const moonLabel = new CSS2DObject(moonDiv)
+moonLabel.position.set(0,moon_radius+0.5,0) 
+moon.add(moonLabel)
+
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+document.body.appendChild(labelRenderer.domElement);
+
 const renderer = new THREE.WebGLRenderer({ alpha: true })
 renderer.setPixelRatio(devicePixelRatio)
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
-const controls = new OrbitControls(camera, renderer.domElement)
 renderer.render(scene, camera)
+
+
+const controls = new OrbitControls(camera, labelRenderer.domElement)
 
 const clock = new THREE.Clock()
 
@@ -66,8 +88,9 @@ const clock = new THREE.Clock()
 const animate = () => {
 	const elapsed = clock.getElapsedTime()
 	moon.position.set(5 * Math.sin(elapsed), 0, 5 * Math.cos(elapsed))
-	earth.rotation.y = elapsed
+	earth.rotation.y = elapsed;
 	controls.update();
+	labelRenderer.render(scene, camera);
 	renderer.render(scene, camera);
 	requestAnimationFrame(animate);
 }
@@ -80,4 +103,5 @@ window.onresize = () => {
 	camera.aspect = window.innerWidth / window.innerHeight
 	camera.updateProjectionMatrix()
 	renderer.setSize(window.innerWidth, window.innerHeight)
+	labelRenderer.setSize(window.innerWidth, window.innerHeight);
 }

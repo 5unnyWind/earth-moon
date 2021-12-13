@@ -6,6 +6,17 @@ canvas{
   background-image: url('./images/stars.jpg');
   background-size: cover;
 }
+.label{
+  color: #fff;
+  background-color: #333;
+  opacity: .7;
+  font-size: 18px;
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 10px;
+}
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
